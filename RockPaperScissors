@@ -1,0 +1,84 @@
+
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println("じゃんけんを開始します。");
+        int win=0 , lose=0 , draw=0;
+        int times=0;
+        
+        while(true) {
+            int cHand, hHand;
+            int retry=0;
+            
+            do {
+                System.out.print("あなたの手をグー(0)、チョキ(1)、パー(2)、終了(9)で指定してください：");
+                hHand = new java.util.Scanner(System.in).nextInt();
+                
+                //入力チェック
+                if(hHand == 9) {
+                    System.out.println("ゲームが終了します。");
+                } else if (hHand>=0 && hHand<=2) {
+                    retry=0;
+                } else {
+                    System.out.println("入力誤り");
+                    retry=1;
+                }
+            } while (retry == 1);
+            
+            if(hHand == 9)
+                break;
+            
+            switch(hHand) {
+            case 0:
+                System.out.print("あなたはグーを出して、");
+                break;
+            case 1:
+                System.out.print("あなたはチョキを出して、");
+                break;
+            case 2:
+                System.out.print("あなたはパーを出して、");
+                break;
+            }
+            
+            cHand = new java.util.Random().nextInt(3);
+            switch(cHand) {
+            case 0:
+                System.out.println("コンピューターはグーを出した。");
+                break;
+            case 1:
+                System.out.println("コンピューターはチョキを出した。");
+                break;
+            case 2:
+                System.out.println("コンピューターはパーを出した。");
+                break;
+            }
+            
+            
+            times++;
+            
+            int check = (cHand-hHand+3)%3;
+            
+            switch (check) {
+                case 0:
+                    draw+=1;
+                    System.out.println("引き分けです。");
+                    break;
+                case 1:
+                    win+=1;
+                    System.out.println("あなたの勝ちです。");
+                    break;
+                case 2:
+                    lose+=1;
+                    System.out.println("コンピューターの勝ちです。");
+                    break;
+            }
+            
+            
+            
+            System.out.println("あなたは通算"+times+"戦で、"+ win + "勝、" + lose + "敗、" + draw + "引き分けです。勝率は"+ (win*100/times)+"%です。");
+            System.out.println("");
+
+        }
+    }
+
+}
