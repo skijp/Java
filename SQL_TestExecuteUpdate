@@ -1,0 +1,39 @@
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class TestExecuteUpdate {
+
+    public static void main(String[] args) {
+        String databasename = "myproject";
+        String user = "root";
+        String password = "1234";
+        String url = "jdbc:mysql://localhost/" + databasename;
+        String sqlInsert = "insert myproject.家計簿 values(?,?,?,?,?)";
+        
+        try(Connection con = DriverManager.getConnection(url, user, password);
+                PreparedStatement st = con.prepareStatement(sqlInsert);){
+            st.setDate(1, Date.valueOf("2018-02-22"));
+            st.setString(2, "食費");
+            st.setString(3, "美味しい夕飯");
+            st.setInt(4, 0);
+            st.setInt(5, 1200);
+            
+            int result = st.executeUpdate();
+            
+            if(result == 1) {
+                System.out.println("SQL statement successfull.");
+            } else {
+                System.out.println("SQL statement failed.");
+            }
+            
+            
+        } catch(SQLException e) {
+            System.out.println("Connection Failed: " + e.getMessage());
+        }
+
+    }
+
+}
