@@ -1,3 +1,4 @@
+#コンピューターと対戦するジャンケンプログラム（分岐構造＆繰り返し）
 
 public class Main {
 
@@ -28,6 +29,7 @@ public class Main {
             if(hHand == 9)
                 break;
             
+            #ユーザーが出した
             switch(hHand) {
             case 0:
                 System.out.print("あなたはグーを出して、");
@@ -40,6 +42,7 @@ public class Main {
                 break;
             }
             
+             #コンピューターが出した
             cHand = new java.util.Random().nextInt(3);
             switch(cHand) {
             case 0:
