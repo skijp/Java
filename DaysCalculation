@@ -1,0 +1,82 @@
+
+public class Q4 {
+
+    public static void main(String[] args) {
+        // 通算日数
+        int year, month, day;
+        System.out.print("1582年以降の西暦年を入力してください： ");
+        year = new java.util.Scanner(System.in).nextInt();     
+        System.out.print("月を入力してください： ");
+        month = new java.util.Scanner(System.in).nextInt();
+        System.out.print("日を入力してください： ");
+        day = new java.util.Scanner(System.in).nextInt();
+        
+        boolean isLeapYear;
+        int totalDays = 0;
+        
+        //うるう年の判定
+        if ( year % 4 == 0  &&  year % 100 != 0  || year % 400 == 0) {
+            isLeapYear = true;
+        } else {
+            isLeapYear = false;
+        }
+        
+        //年の通算日数
+        for (int i = 1582; i < year; i++) {
+            totalDays += 365;
+            if (i % 4 == 0  &&  i % 100 != 0  || i % 400 == 0) {
+                totalDays += 1;
+            } 
+        }
+        System.out.println("日数： " + totalDays);
+        
+        //月の通算日数
+        for (int i = 1; i < month; i++) {
+            switch(i) {
+                case 2:
+                    if(isLeapYear) {
+                        totalDays += 29;
+                    } else {
+                        totalDays += 28;
+                    }
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    totalDays += 30;
+                    break;
+                default:
+                    totalDays += 31;            
+            }
+        }
+        System.out.println("日数： " + totalDays);
+        
+        //日の通算日数
+        totalDays += day;
+        
+        System.out.println("日数： " + totalDays);
+        
+        //曜日の表示
+        String dayOfWeek = "";
+        switch((totalDays+4)%7) {
+        case 0:
+            dayOfWeek = "日曜日"; break;
+        case 1:
+            dayOfWeek = "月曜日"; break;
+        case 2:
+            dayOfWeek = "火曜日"; break;
+        case 3:
+            dayOfWeek = "水曜日"; break;
+        case 4:
+            dayOfWeek = "木曜日"; break;    
+        case 5:
+            dayOfWeek = "金曜日"; break;   
+        case 6:
+            dayOfWeek = "土曜日"; break;    
+        }
+        
+        System.out.println(year+month+day+"は" + dayOfWeek);
+    }
+
+}
